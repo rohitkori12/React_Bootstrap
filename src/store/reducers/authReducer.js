@@ -4,6 +4,7 @@ import { logoutUser, fetchAuthTokenActions } from '../actions/authActions';
 const initialState = {
   username: null,
   authToken: null,
+  homePageData: null,
   tokenRequested: false
 };
 

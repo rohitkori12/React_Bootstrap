@@ -3,6 +3,7 @@
  */
 
 import React, { Component } from 'react';
+import { Navbar, NavbarBrand } from 'reactstrap';
 
 class PageHeader extends Component {
   constructor(props) {
@@ -12,7 +13,16 @@ class PageHeader extends Component {
     };
   }
   render() {
-    return <div />;
+    // Header html starts here
+    // return <div />;
+
+    return (
+      <div>
+        <Navbar color="light" light expand="md">
+          <NavbarBrand href="/">EPISCAN</NavbarBrand>
+        </Navbar>
+      </div>
+    );
   }
 }
 

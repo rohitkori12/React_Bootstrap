@@ -7,6 +7,8 @@ import { configureRouter } from './router/router';
 import { configureSaga } from './store/sagas/saga';
 
 import './styles/index.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.js';
 import registerServiceWorker from './registerServiceWorker';
 
 const renderer = page => {
