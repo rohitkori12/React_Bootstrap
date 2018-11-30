@@ -19,7 +19,7 @@ class DefaultLayout extends Component {
     return (
       <div className="app">
         {this.props.header}
-        <Container>{this.props.content}</Container>
+        <div>{this.props.content}</div>
         <footer className="w-100 footer">{this.props.footer}</footer>
       </div>
     );
