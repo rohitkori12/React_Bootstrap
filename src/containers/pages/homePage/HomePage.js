@@ -52,6 +52,13 @@ class HomePage extends Component {
     event.stopPropagation();
   }
 
+  handleEdit(event, idx) {
+    alert('Editing');
+    // history.push('edit');
+    // event.preventDefault();
+    event.stopPropagation();
+  }
+
   onRowClick(event, { rowData, rowIndex, tableData }) {
     alert('Row ' + rowIndex + ' is clicked');
     console.log(rowData, tableData[rowIndex]);
@@ -99,9 +106,14 @@ class HomePage extends Component {
         sortable: false,
         filterable: false,
         transform: (value, idx) => (
-          <Button color="danger" onClick={e => this.handleDelete(e, idx)} onKeyDown={e => this.handleDelete(e, idx)}>
-            Delete
-          </Button>
+          <div>
+            <Button color="danger" onClick={e => this.handleDelete(e, idx)} onKeyDown={e => this.handleDelete(e, idx)}>
+              Delete
+            </Button>
+            <Button color="secondary" onClick={e => this.handleEdit(e, idx)}>
+              Edit
+            </Button>
+          </div>
         )
       }
     };
