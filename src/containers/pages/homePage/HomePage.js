@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Table } from 'reactstrap';
+import { Button } from 'reactstrap';
 import SideBar from '../../../components/sideBar/SideBar';
+import SmartDataTable from 'react-smart-data-table';
 
 class HomePage extends Component {
   constructor(props) {
@@ -16,7 +17,8 @@ class HomePage extends Component {
             Preset_Threshold: '',
             Severity: '',
             Alert_Medium: 'SMS',
-            Turn_Off: false
+            Turn_Off: false,
+            actions: null
           },
           {
             Region: 'West',
@@ -25,7 +27,8 @@ class HomePage extends Component {
             Preset_Threshold: '',
             Severity: '',
             Alert_Medium: 'SMS',
-            Turn_Off: false
+            Turn_Off: false,
+            actions: null
           },
           {
             Region: 'North',
@@ -34,14 +37,78 @@ class HomePage extends Component {
             Preset_Threshold: '',
             Severity: '',
             Alert_Medium: 'SMS',
-            Turn_Off: false
+            Turn_Off: false,
+            actions: null
           }
         ]
       }
     };
   }
 
+  handleDelete(event, idx) {
+    alert('Are you sure you want to delete row :' + idx + '?');
+    console.log(event, idx);
+    event.preventDefault();
+    event.stopPropagation();
+  }
+
+  onRowClick(event, { rowData, rowIndex, tableData }) {
+    alert('Row ' + rowIndex + ' is clicked');
+    console.log(rowData, tableData[rowIndex]);
+  }
+
+  getHeaders() {
+    return {
+      region: {
+        text: 'Region',
+        sortable: false,
+        filterable: false
+      },
+      diseaseName: {
+        text: 'Disease_Name',
+        sortable: false,
+        filterable: false
+      },
+      checkBaseline: {
+        text: 'Check_Baseline',
+        sortable: false,
+        filterable: false
+      },
+      presetThreshold: {
+        text: 'Preset_Threshold',
+        sortable: false,
+        filterable: false
+      },
+      severity: {
+        text: 'Severity',
+        sortable: false,
+        filterable: false
+      },
+      alertMedium: {
+        text: 'Alert_Medium',
+        sortable: false,
+        filterable: false
+      },
+      turnOff: {
+        text: 'Turn_Off',
+        sortable: false,
+        filterable: false
+      },
+      actions: {
+        text: 'Actions',
+        sortable: false,
+        filterable: false,
+        transform: (value, idx) => (
+          <Button color="danger" onClick={e => this.handleDelete(e, idx)} onKeyDown={e => this.handleDelete(e, idx)}>
+            Delete
+          </Button>
+        )
+      }
+    };
+  }
+
   render() {
+    const headers = this.getHeaders();
     return (
       <div className="row">
         <div className="col-md-2">
@@ -49,8 +116,10 @@ class HomePage extends Component {
           <hr />
         </div>
         <div className="col-md-10">
-          <p>Main Content</p>
-          <Table size="sm">
+          <p className="text-center">React Smart Data Table</p>
+
+          {/* Using normal table below */}
+          {/* <Table size="sm">
             <thead>
               <tr>
                 <th>#</th>
@@ -75,7 +144,17 @@ class HomePage extends Component {
                 );
               })}
             </tbody>
-          </Table>
+          </Table> */}
+
+          {/* React Smart Table Implementation */}
+          <SmartDataTable
+            data={this.state.tableContent.recordsData}
+            name="test-table"
+            className="ui compact selectable table"
+            headers={headers}
+            onRowClick={this.onRowClick}
+            sortable
+          />
         </div>
       </div>
     );
